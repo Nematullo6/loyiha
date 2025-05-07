@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NA Innovations</title>
+  <link rel="shortcut icon" href="rasm/logo.png" type="png">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #1d1d1d;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .signup-container {
+      background: #1c1c1c;
+      color: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+      width: 350px;
+      animation: fadeIn 0.7s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #ffffff;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      background-color: #2b2b2b;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    input:focus {
+      outline: 2px solid #2575fc;
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 10px;
+      margin-bottom: 15px;
+      font-size: 15px;
+      color: #ccc;
+    }
+
+    .login-link a {
+      color: #2575fc;
+      text-decoration: none;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      background-color: #2575fc;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #1e63e2;
+    }
+
+    .success {
+      text-align: center;
+      margin-top: 15px;
+      color: lightgreen;
+      font-weight: bold;
+    }
+
+    .error {
+      text-align: center;
+      margin-top: 10px;
+      color: #ff6b6b;
+    }
+  </style>
+</head>
+<body>
+  <div class="signup-container">
+    <h2>Registratsiya</h2>
+    <form id="signup-form">
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+
+      <div class="login-link">
+        <span>Allaqachon hisobingiz bormi? <a href="registr.html">Kirish</a></span>
+      </div>
+
+      <button type="submit">Register</button>
+
+      <div class="error" id="errorMsg"></div>
+      <div class="success" id="successMsg"></div>
+
+    </form>
+
+    <!-- Asosiy sahifaga o‘tish tugmasi -->
+    <div style="text-align: center; margin-top: 20px;">
+      <a href="index.html">
+        <button style="background-color: #444; border: none; padding: 10px 20px; border-radius: 8px; color: #fff; cursor: pointer; transition: 0.3s ease;">
+          Asosiy sahifaga o‘tish
+        </button>
+      </a>
+    </div>
+    
+
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('signup-form');
+    const errorMsg = document.getElementById('errorMsg');
+    const successMsg = document.getElementById('successMsg');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+
+      errorMsg.textContent = '';
+      successMsg.textContent = '';
+
+      if (password.length < 6) {
+        errorMsg.textContent = 'Parol kamida 6 ta belgidan iborat bo‘lishi kerak.';
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        errorMsg.textContent = 'Parollar mos emas.';
+        return;
+      }
+
+      successMsg.textContent = `Xush kelibsiz, ${username}! Ro‘yxatdan muvaffaqiyatli o‘tdingiz.`;
+
+      localStorage.setItem('user', JSON.stringify({ username, email }));
+      form.reset();
+    });
+  </script>
+</body>
+</html>
+
